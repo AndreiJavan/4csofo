@@ -37,8 +37,8 @@
         <!-- Activities for AdminDashboard buttons -->
         <activity android:name=".ManageOrdersActivity" android:exported="false" />
         <activity android:name=".UsersActivity" android:exported="false" />
-        <activity android:name=".CategoriesActivity" android:exported="false" />
-        <activity android:name=".MenuItemsActivity" android:exported="false" />
+        <activity android:name=".AdminCategoriesActivity" android:exported="false" />
+        <activity android:name=".AdminMenuItemsActivity" android:exported="false" />
 
         <!-- ✅ New: Profile Activity (User Profile & Address Management) -->
         <activity android:name=".ProfileActivity" android:exported="false" />

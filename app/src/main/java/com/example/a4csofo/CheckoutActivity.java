@@ -1,7 +1,6 @@
 package com.example.a4csofo;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -77,7 +76,7 @@ public class CheckoutActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 cartList.clear();
                 for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                    MenuItemsActivity.FoodItem food = itemSnapshot.getValue(MenuItemsActivity.FoodItem.class);
+                    AdminMenuItemsActivity.FoodItem food = itemSnapshot.getValue(AdminMenuItemsActivity.FoodItem.class);
                     if (food != null) {
                         cartList.add(new CartItem(food.name, 1, food.price));
                     }

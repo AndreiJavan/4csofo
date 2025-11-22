@@ -1,0 +1,16 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Background color for the admin floating nav -->
+    <solid android:color="@color/background_white" />
+
+    <!-- Rounded corners for floating effect -->
+    <corners android:radius="24dp" />
+
+    <!-- Optional padding for visual spacing -->
+    <padding
+        android:left="8dp"
+        android:top="8dp"
+        android:right="8dp"
+        android:bottom="8dp" />
+</shape>

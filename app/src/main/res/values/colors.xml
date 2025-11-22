@@ -1,19 +1,19 @@
 <resources>
 
-    <!-- Blue Theme -->
-    <color name="primary">#1E88E5</color>          <!-- Bright Blue -->
-    <color name="primary_dark">#1565C0</color>     <!-- Darker Blue -->
-    <color name="accent">#1E88E5</color>           <!-- Accent Blue -->
-    <color name="accent_dark">#0A2A43</color>      <!-- Deep Navy Blue -->
+    <!-- Primary Brand Colors (from logo) -->
+    <color name="primary">#D55F39</color>          <!-- Red Bowl -->
+    <color name="primary_dark">#B44F30</color>     <!-- Darker Red -->
+    <color name="accent">#8FAE51</color>           <!-- Green Cart -->
+    <color name="accent_dark">#6A873C</color>      <!-- Dark Green -->
 
     <!-- Background Colors -->
-    <color name="background_light">#E3F2FD</color> <!-- Light Blue BG -->
+    <color name="background_light">#E9E9E9</color> <!-- Light Gray BG -->
     <color name="background_white">#FFFFFF</color> <!-- White -->
-    <color name="background_card">#F3F8FF</color>  <!-- Light Blue Card BG -->
+    <color name="background_card">#FFF9E6</color>  <!-- Light Cream (from yellow/orange area) -->
 
     <!-- Text Colors -->
     <color name="text_white">#FFFFFF</color>       <!-- White Text -->
-    <color name="text_primary">#0D47A1</color>     <!-- Deep Blue for Text -->
-    <color name="text_secondary">#6D7C8A</color>   <!-- Soft Muted Blue-Gray -->
+    <color name="text_primary">#3A537D</color>     <!-- Deep Blue (matches “4C's” text) -->
+    <color name="text_secondary">#6A7A90</color>   <!-- Blue-gray -->
 
 </resources>

@@ -1,6 +1,5 @@
 package com.example.a4csofo;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -97,7 +96,7 @@ public class CartActivity extends AppCompatActivity {
                 cartItems.clear();
                 cartKeys.clear();
                 for (DataSnapshot data : snapshot.getChildren()) {
-                    MenuItemsActivity.FoodItem food = data.getValue(MenuItemsActivity.FoodItem.class);
+                    AdminMenuItemsActivity.FoodItem food = data.getValue(AdminMenuItemsActivity.FoodItem.class);
                     if (food != null) {
                         cartItems.add(food.name + " - ₱" + food.price);
                         cartKeys.add(data.getKey());

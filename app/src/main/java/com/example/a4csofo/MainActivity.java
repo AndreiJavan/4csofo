@@ -1,7 +1,10 @@
 package com.example.a4csofo;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerViewFood;
     private BottomNavigationView bottomNavigation;
     private FirebaseAuth auth;
-    private List<MenuItemsActivity.FoodItem> foodList = new ArrayList<>();
+    private List<FoodItem> foodList = new ArrayList<>();
     private FoodAdapter foodAdapter;
 
     @Override
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         tvWelcome = findViewById(R.id.tvWelcome);
         recyclerViewFood = findViewById(R.id.recyclerViewFood);
         bottomNavigation = findViewById(R.id.bottomNavigation);
+        ivCartIcon = findViewById(R.id.ivCartIcon);
 
         // Set welcome message
         FirebaseUser user = auth.getCurrentUser();
@@ -60,26 +63,16 @@ public class MainActivity extends AppCompatActivity {
 
         loadFoodItemsFromFirebase();
 
-        // Bottom navigation setup
+        // Bottom navigation
         bottomNavigation.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.nav_home) {
-                // Already on home
-                return true;
-            } else if (itemId == R.id.nav_cart) {
-                startActivity(new Intent(MainActivity.this, CartActivity.class));
-                return true;
-            } else if (itemId == R.id.nav_orders) {
-                startActivity(new Intent(MainActivity.this, OrdersActivity.class));
-                return true;
-            } else if (itemId == R.id.nav_profile) {
-                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
-                return true;
-            }
-            return false;
+            if (itemId == R.id.nav_home) return true;
+            else if (itemId == R.id.nav_cart) startActivity(new Intent(MainActivity.this, CartActivity.class));
+            else if (itemId == R.id.nav_orders) startActivity(new Intent(MainActivity.this, OrdersActivity.class));
+            else if (itemId == R.id.nav_profile) startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+            return true;
         });
 
-        // Cart icon click
         ivCartIcon.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, CartActivity.class)));
     }
 
@@ -88,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
         foodRef.get().addOnSuccessListener(snapshot -> {
             foodList.clear();
             for (DataSnapshot itemSnapshot : snapshot.getChildren()) {
-                MenuItemsActivity.FoodItem food = itemSnapshot.getValue(MenuItemsActivity.FoodItem.class);
+                FoodItem food = itemSnapshot.getValue(FoodItem.class);
                 if (food != null) foodList.add(food);
             }
             foodAdapter.notifyDataSetChanged();
@@ -97,12 +90,23 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    // Helper method to convert Base64 string to Bitmap
+    public static Bitmap base64ToBitmap(String base64Str) {
+        try {
+            byte[] decodedBytes = Base64.decode(base64Str, Base64.DEFAULT);
+            return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     // Adapter for food items
     public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodViewHolder> {
 
-        private final List<MenuItemsActivity.FoodItem> foods;
+        private final List<FoodItem> foods;
 
-        public FoodAdapter(List<MenuItemsActivity.FoodItem> foods) {
+        public FoodAdapter(List<FoodItem> foods) {
             this.foods = foods;
         }
 
@@ -116,18 +120,18 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull FoodViewHolder holder, int position) {
-            MenuItemsActivity.FoodItem food = foods.get(position);
+            FoodItem food = foods.get(position);
             holder.tvName.setText(food.name);
             holder.tvPrice.setText("₱" + String.format("%.2f", food.price));
             holder.tvDesc.setText(food.description);
             holder.tvCategory.setText(food.category);
             holder.tvPrepTime.setText(food.prepTime + " mins");
 
-            if (food.imageUrl != null && !food.imageUrl.isEmpty()) {
-                Glide.with(MainActivity.this)
-                        .load(food.imageUrl)
-                        .placeholder(R.drawable.ic_placeholder)
-                        .into(holder.ivFoodImage);
+            // Load Base64 image
+            if (food.base64Image != null && !food.base64Image.isEmpty()) {
+                Bitmap bitmap = base64ToBitmap(food.base64Image);
+                if (bitmap != null) holder.ivFoodImage.setImageBitmap(bitmap);
+                else holder.ivFoodImage.setImageResource(R.drawable.ic_placeholder);
             } else {
                 holder.ivFoodImage.setImageResource(R.drawable.ic_placeholder);
             }
@@ -141,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             return foods.size();
         }
 
-        private void addToCart(MenuItemsActivity.FoodItem food) {
+        private void addToCart(FoodItem food) {
             FirebaseUser currentUser = auth.getCurrentUser();
             if (currentUser == null) {
                 Toast.makeText(MainActivity.this, "Please log in first", Toast.LENGTH_SHORT).show();
@@ -154,10 +158,8 @@ public class MainActivity extends AppCompatActivity {
                     .push();
 
             cartRef.setValue(food)
-                    .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(MainActivity.this, food.name + " added to cart!", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(MainActivity.this, CartActivity.class));
-                    })
+                    .addOnSuccessListener(aVoid ->
+                            Toast.makeText(MainActivity.this, food.name + " added to cart!", Toast.LENGTH_SHORT).show())
                     .addOnFailureListener(e ->
                             Toast.makeText(MainActivity.this, "Failed to add to cart: " + e.getMessage(), Toast.LENGTH_SHORT).show()
                     );
@@ -179,5 +181,17 @@ public class MainActivity extends AppCompatActivity {
                 btnAddCart = itemView.findViewById(R.id.btnAddCart);
             }
         }
+    }
+
+    // FoodItem class for Firebase
+    public static class FoodItem {
+        public String name;
+        public String description;
+        public String category;
+        public String prepTime;
+        public double price;
+        public String base64Image; // use this instead of imageUrl
+
+        public FoodItem() {} // Required for Firebase
     }
 }

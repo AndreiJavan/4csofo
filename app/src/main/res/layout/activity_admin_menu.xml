@@ -62,6 +62,23 @@
                 android:textColorHint="@color/text_secondary"/>
 
             <Button
+                android:id="@+id/btnPickImage"
+                android:text="Select Image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:backgroundTint="@color/primary"
+                android:textColor="@color/text_white"/>
+
+            <ImageView
+                android:id="@+id/ivFoodPreview"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="12dp"
+                android:scaleType="centerCrop"
+                android:background="@color/background_card"/>
+
+            <Button
                 android:id="@+id/btnAddFood"
                 android:text="Add Food Item"
                 android:layout_width="match_parent"
@@ -72,18 +89,4 @@
         </LinearLayout>
     </ScrollView>
 
-    <TextView
-        android:text="Available Foods"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:textColor="@color/text_primary"/>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvFoods"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
 </LinearLayout>
