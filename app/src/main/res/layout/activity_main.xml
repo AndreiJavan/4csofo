@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -6,7 +5,6 @@
     android:layout_height="match_parent"
     android:background="@color/background_light">
 
-    <!-- App Bar Layout -->
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
@@ -17,19 +15,18 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:contentScrim="@drawable/bg_gradient"
-            app:collapsedTitleTextColor="@color/text_white"
-            app:expandedTitleColor="@color/text_white"
-            app:titleEnabled="false">
+            app:expandedTitleTextColor="@android:color/white"
+            app:collapsedTitleTextColor="@color/primary_dark">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="24dp"
-                android:paddingTop="48dp">
+                android:paddingTop="48dp"
+                android:background="@color/primary_dark"> <!-- ⭐ DARK BLUE -->
 
-                <!-- Welcome Header -->
+                <!-- Welcome Texts -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -62,20 +59,49 @@
 
                     </LinearLayout>
 
-                    <!-- Cart Icon -->
-                    <ImageView
-                        android:id="@+id/ivCartIcon"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
-                        android:src="@android:drawable/ic_menu_cart"
-                        android:background="@drawable/bg_card_modern"
-                        android:padding="12dp"
-                        android:clickable="true"
-                        android:focusable="true" />
-
                 </LinearLayout>
 
-                <!-- Quick Stats Cards -->
+                <!-- ⭐ SEARCH BAR START -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp"
+                    app:cardBackgroundColor="@color/background_white"
+                    android:layout_marginBottom="16dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp">
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_search"
+                            android:tint="@color/text_secondary" />
+
+                        <EditText
+                            android:id="@+id/etSearch"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:hint="Search food..."
+                            android:background="@android:color/transparent"
+                            android:paddingStart="8dp"
+                            android:textColor="@color/text_primary"
+                            android:textColorHint="@color/text_secondary"
+                            android:inputType="text" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+                <!-- ⭐ SEARCH BAR END -->
+
+                <!-- Menu & Orders Cards -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -158,7 +184,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Main Content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -170,7 +195,6 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Food Categories Section -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -180,7 +204,6 @@
                 android:textColor="@color/text_primary"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Food Items RecyclerView -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewFood"
                 android:layout_width="match_parent"
@@ -191,7 +214,6 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"

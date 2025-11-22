@@ -99,13 +99,14 @@
             android:textStyle="bold"
             android:layout_marginBottom="8dp"/>
 
+        <!-- ✅ UPDATED RADIOGROUP WITH 3 OPTIONS -->
         <RadioGroup
             android:id="@+id/paymentGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <RadioButton
-                android:id="@+id/rbCash"
+                android:id="@+id/rbCashOnDelivery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Cash on Delivery" />
@@ -117,10 +118,10 @@
                 android:text="GCash" />
 
             <RadioButton
-                android:id="@+id/rbCreditCard"
+                android:id="@+id/rbPickUp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Credit Card" />
+                android:text="Pick Up" />
         </RadioGroup>
 
         <Button

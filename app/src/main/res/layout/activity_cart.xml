@@ -1,36 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_light">
 
-    <TextView
-        android:id="@+id/tvCartTitle"
-        android:text="Your Cart"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"/>
-
-    <ListView
-        android:id="@+id/listViewCart"
+    <!-- Main Content -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:divider="#CCCCCC"
-        android:dividerHeight="1dp"
-        android:padding="4dp"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="top"
+        android:layout_marginBottom="60dp">
 
-    <Button
-        android:id="@+id/btnProceedCheckout"
-        android:text="Proceed to Checkout"
+        <TextView
+            android:id="@+id/tvCartTitle"
+            android:text="Your Cart"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"/>
+
+        <ListView
+            android:id="@+id/listViewCart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:divider="#CCCCCC"
+            android:dividerHeight="1dp"
+            android:padding="4dp"
+            android:background="@color/background_card"/>
+
+        <Button
+            android:id="@+id/btnProceedCheckout"
+            android:text="Proceed to Checkout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/primary"
+            android:textColor="@color/text_white"
+            android:layout_marginTop="12dp"/>
+    </LinearLayout>
+
+    <!-- Bottom Navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/purple_500"
-        android:textColor="#FFF"
-        android:layout_marginTop="12dp"/>
+        android:layout_gravity="bottom"
+        android:background="@color/background_white"
+        app:menu="@menu/bottom_navigation_menu"
+        app:itemIconTint="@color/primary"
+        app:itemTextColor="@color/primary"
+        app:elevation="8dp" />
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

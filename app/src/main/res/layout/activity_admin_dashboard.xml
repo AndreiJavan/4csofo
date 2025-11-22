@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:background="@color/background_light"
     tools:context=".AdminDashboardActivity">
 
     <!-- Search Box -->
@@ -19,6 +20,8 @@
         android:background="@drawable/search_box_bg"
         android:drawableStart="@android:drawable/ic_menu_search"
         android:drawablePadding="8dp"
+        android:textColor="@color/text_primary"
+        android:textColorHint="@color/text_secondary"
         android:layout_marginBottom="16dp"/>
 
     <!-- Admin Buttons -->
@@ -39,8 +42,8 @@
             android:text="Orders"
             android:layout_marginEnd="8dp"
             app:cornerRadius="12dp"
-            app:backgroundTint="@color/purple_500"
-            android:textColor="@android:color/white"/>
+            app:backgroundTint="@color/primary"
+            android:textColor="@color/text_white"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnUsers"
@@ -50,8 +53,8 @@
             android:text="Users"
             android:layout_marginEnd="8dp"
             app:cornerRadius="12dp"
-            app:backgroundTint="@color/purple_500"
-            android:textColor="@android:color/white"/>
+            app:backgroundTint="@color/primary"
+            android:textColor="@color/text_white"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCategories"
@@ -61,8 +64,8 @@
             android:text="Categories"
             android:layout_marginEnd="8dp"
             app:cornerRadius="12dp"
-            app:backgroundTint="@color/purple_500"
-            android:textColor="@android:color/white"/>
+            app:backgroundTint="@color/primary"
+            android:textColor="@color/text_white"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnMenuItems"
@@ -71,8 +74,8 @@
             android:layout_weight="1"
             android:text="Menu Items"
             app:cornerRadius="12dp"
-            app:backgroundTint="@color/purple_500"
-            android:textColor="@android:color/white"/>
+            app:backgroundTint="@color/primary"
+            android:textColor="@color/text_white"/>
     </LinearLayout>
 
     <!-- RecyclerView -->
@@ -82,7 +85,8 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:clipToPadding="false"
-        android:paddingBottom="8dp"/>
+        android:paddingBottom="8dp"
+        android:background="@color/background_card"/>
 
     <!-- ProgressBar -->
     <ProgressBar
@@ -91,6 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/primary_dark"/>
 
 </LinearLayout>
