@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
@@ -36,6 +38,41 @@ public class CartActivity extends AppCompatActivity {
         listViewCart = findViewById(R.id.listViewCart);
         btnProceedCheckout = findViewById(R.id.btnProceedCheckout);
 
+        // 🔹 Initialize Bottom Navigation
+        BottomNavigationView bottomNavigation = findViewById(R.id.bottomNavigation);
+        bottomNavigation.setSelectedItemId(R.id.nav_cart); // highlight current tab
+
+        bottomNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull android.view.MenuItem item) {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.nav_home) {
+                    startActivity(new Intent(CartActivity.this, MainActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+
+                } else if (itemId == R.id.nav_cart) {
+                    // Already in CartActivity
+                    return true;
+
+                } else if (itemId == R.id.nav_orders) {
+                    // 🆕 Navigate to OrdersActivity
+                    startActivity(new Intent(CartActivity.this, OrdersActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+
+                } else if (itemId == R.id.nav_profile) {
+                    startActivity(new Intent(CartActivity.this, ProfileActivity.class));
+                    overridePendingTransition(0, 0);
+                    return true;
+                }
+
+                return false;
+            }
+        });
+
+        // 🔹 Firebase Authentication
         auth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = auth.getCurrentUser();
 
@@ -45,6 +82,7 @@ public class CartActivity extends AppCompatActivity {
             return;
         }
 
+        // 🔹 Load Cart Items
         cartItems = new ArrayList<>();
         cartKeys = new ArrayList<>();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -53,7 +91,6 @@ public class CartActivity extends AppCompatActivity {
 
         cartRef = FirebaseDatabase.getInstance().getReference("carts").child(currentUser.getUid());
 
-        // Load cart items
         cartRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -63,7 +100,7 @@ public class CartActivity extends AppCompatActivity {
                     MenuItemsActivity.FoodItem food = data.getValue(MenuItemsActivity.FoodItem.class);
                     if (food != null) {
                         cartItems.add(food.name + " - ₱" + food.price);
-                        cartKeys.add(data.getKey()); // store Firebase key
+                        cartKeys.add(data.getKey());
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -79,7 +116,7 @@ public class CartActivity extends AppCompatActivity {
             }
         });
 
-        // Long click to remove item
+        // 🔹 Long click to remove item
         listViewCart.setOnItemLongClickListener((parent, view, position, id) -> {
             String itemName = cartItems.get(position);
             String key = cartKeys.get(position);
@@ -100,6 +137,7 @@ public class CartActivity extends AppCompatActivity {
             return true;
         });
 
+        // 🔹 Proceed to checkout
         btnProceedCheckout.setOnClickListener(v -> {
             if (cartItems.isEmpty()) {
                 Toast.makeText(this, "Your cart is empty!", Toast.LENGTH_SHORT).show();

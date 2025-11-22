@@ -1,7 +1,9 @@
 package com.example.a4csofo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.*;
@@ -30,6 +33,9 @@ public class OrdersActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseUser currentUser;
 
+    private BottomNavigationView bottomNavigation;
+    private ImageView ivCartIcon;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +45,9 @@ public class OrdersActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         emptyLayout = findViewById(R.id.emptyLayout);
         txtEmptyMessage = findViewById(R.id.txtEmptyMessage);
+
+        bottomNavigation = findViewById(R.id.bottomNavigation);
+
 
         recyclerOrders.setLayoutManager(new LinearLayoutManager(this));
         orderList = new ArrayList<>();
@@ -54,16 +63,42 @@ public class OrdersActivity extends AppCompatActivity {
             return;
         }
 
-        // Reference all orders
         ordersRef = FirebaseDatabase.getInstance().getReference("orders");
 
         loadUserOrders();
+        setupNavigation();
     }
+
+    private void setupNavigation() {
+
+        bottomNavigation.setSelectedItemId(R.id.nav_orders);
+
+        bottomNavigation.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.nav_home) {
+                startActivity(new Intent(OrdersActivity.this, MainActivity.class));
+                return true;
+            } else if (itemId == R.id.nav_cart) {
+                startActivity(new Intent(OrdersActivity.this, CartActivity.class));
+                return true;
+            } else if (itemId == R.id.nav_orders) {
+                return true;
+            } else if (itemId == R.id.nav_profile) {
+                startActivity(new Intent(OrdersActivity.this, ProfileActivity.class));
+                return true;
+            }
+            return false;
+        });
+
+        ivCartIcon.setOnClickListener(v ->
+                startActivity(new Intent(OrdersActivity.this, CartActivity.class))
+        );
+    }
+
 
     private void loadUserOrders() {
         progressBar.setVisibility(View.VISIBLE);
 
-        // Filter orders by current user
         ordersRef.orderByChild("userId").equalTo(currentUser.getUid())
                 .addValueEventListener(new ValueEventListener() {
                     @Override
@@ -73,7 +108,7 @@ public class OrdersActivity extends AppCompatActivity {
                         for (DataSnapshot orderSnap : snapshot.getChildren()) {
                             OrderModel order = orderSnap.getValue(OrderModel.class);
                             if (order != null) {
-                                order.setOrderKey(orderSnap.getKey()); // save Firebase key
+                                order.setOrderKey(orderSnap.getKey());
                                 orderList.add(order);
                             }
                         }

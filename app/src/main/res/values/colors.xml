@@ -1,35 +1,19 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Modern Color Palette -->
-    <color name="primary">#FF6B35</color>
-    <color name="primary_dark">#E55A2B</color>
-    <color name="primary_light">#FF8A65</color>
-    <color name="accent">#4CAF50</color>
-    <color name="accent_dark">#388E3C</color>
-    
+
+    <!-- Blue Theme -->
+    <color name="primary">#1E88E5</color>          <!-- Bright Blue -->
+    <color name="primary_dark">#1565C0</color>     <!-- Darker Blue -->
+    <color name="accent">#1E88E5</color>           <!-- Accent Blue -->
+    <color name="accent_dark">#0A2A43</color>      <!-- Deep Navy Blue -->
+
     <!-- Background Colors -->
-    <color name="background_light">#FAFAFA</color>
-    <color name="background_white">#FFFFFF</color>
-    <color name="background_card">#FFFFFF</color>
-    
+    <color name="background_light">#E3F2FD</color> <!-- Light Blue BG -->
+    <color name="background_white">#FFFFFF</color> <!-- White -->
+    <color name="background_card">#F3F8FF</color>  <!-- Light Blue Card BG -->
+
     <!-- Text Colors -->
-    <color name="text_primary">#212121</color>
-    <color name="text_secondary">#757575</color>
-    <color name="text_hint">#BDBDBD</color>
-    <color name="text_white">#FFFFFF</color>
-    
-    <!-- Status Colors -->
-    <color name="success">#4CAF50</color>
-    <color name="warning">#FF9800</color>
-    <color name="error">#F44336</color>
-    <color name="info">#2196F3</color>
-    
-    <!-- Legacy Colors -->
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="purple_500">#FF6B35</color>
-    
-    <!-- Gradient Colors -->
-    <color name="gradient_start">#FF6B35</color>
-    <color name="gradient_end">#FF8A65</color>
+    <color name="text_white">#FFFFFF</color>       <!-- White Text -->
+    <color name="text_primary">#0D47A1</color>     <!-- Deep Blue for Text -->
+    <color name="text_secondary">#6D7C8A</color>   <!-- Soft Muted Blue-Gray -->
+
 </resources>

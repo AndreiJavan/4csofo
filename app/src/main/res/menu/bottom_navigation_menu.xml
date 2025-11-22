@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
     <item
         android:id="@+id/nav_home"
-        android:icon="@android:drawable/ic_menu_home"
+        android:icon="@drawable/ic_home"
         android:title="Home" />
-    
+
     <item
         android:id="@+id/nav_cart"
-        android:icon="@android:drawable/ic_menu_cart"
-        android:title="Cart" />
-    
+        android:icon="@drawable/ic_menu_cart"
+        android:title="My Cart" />
+
     <item
         android:id="@+id/nav_orders"
-        android:icon="@android:drawable/ic_menu_sort_by_size"
-        android:title="Orders" />
-    
+        android:icon="@drawable/ic_orders"
+        android:title="My Orders" />
+
     <item
         android:id="@+id/nav_profile"
-        android:icon="@android:drawable/ic_menu_myplaces"
-        android:title="Profile" />
+        android:icon="@drawable/ic_profile_settings"
+        android:title="Account" />
 </menu>

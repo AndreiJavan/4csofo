@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:padding="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_light">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -20,32 +21,45 @@
                 android:id="@+id/etName"
                 android:hint="Food Name"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primary"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"/>
 
             <EditText
                 android:id="@+id/etPrice"
                 android:hint="Price"
                 android:inputType="numberDecimal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primary"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"/>
 
             <EditText
                 android:id="@+id/etPrepTime"
                 android:hint="Preparation Time (minutes)"
                 android:inputType="number"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primary"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"/>
 
             <Spinner
                 android:id="@+id/spCategory"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primary"/>
 
             <EditText
                 android:id="@+id/etDescription"
                 android:hint="Description"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/primary"
+                android:textColor="@color/text_primary"
+                android:textColorHint="@color/text_secondary"/>
 
             <Button
                 android:id="@+id/btnAddFood"
@@ -53,8 +67,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:backgroundTint="@color/purple_500"
-                android:textColor="#FFF"/>
+                android:backgroundTint="@color/primary"
+                android:textColor="@color/text_white"/>
         </LinearLayout>
     </ScrollView>
 
@@ -64,7 +78,8 @@
         android:textSize="18sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp"
+        android:textColor="@color/text_primary"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvFoods"

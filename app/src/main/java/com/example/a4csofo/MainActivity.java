@@ -2,6 +2,7 @@ package com.example.a4csofo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         tvWelcome = findViewById(R.id.tvWelcome);
-        ivCartIcon = findViewById(R.id.ivCartIcon);
         recyclerViewFood = findViewById(R.id.recyclerViewFood);
         bottomNavigation = findViewById(R.id.bottomNavigation);
 
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             holder.tvDesc.setText(food.description);
             holder.tvCategory.setText(food.category);
             holder.tvPrepTime.setText(food.prepTime + " mins");
-            
+
             if (food.imageUrl != null && !food.imageUrl.isEmpty()) {
                 Glide.with(MainActivity.this)
                         .load(food.imageUrl)
