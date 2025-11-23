@@ -136,6 +136,11 @@ public class MainActivity extends AppCompatActivity {
                 holder.ivFoodImage.setImageResource(R.drawable.ic_placeholder);
             }
 
+            // ------------------ Handle Availability ------------------
+            // Gray out and disable add to cart if not available
+            holder.itemView.setAlpha(food.available ? 1.0f : 0.5f);
+            holder.btnAddCart.setEnabled(food.available);
+
             // Add to Cart button
             holder.btnAddCart.setOnClickListener(v -> addToCart(food));
         }
@@ -191,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
         public String prepTime;
         public double price;
         public String base64Image; // use this instead of imageUrl
+        public boolean available = true; // added field for availability
 
         public FoodItem() {} // Required for Firebase
     }
